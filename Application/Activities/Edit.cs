@@ -3,7 +3,7 @@ using Domain;
 using MediatR;
 using Persistence;
 
-namespace Application
+namespace Application.Activities
 {
     public class Edit
     {
@@ -24,15 +24,14 @@ namespace Application
               _context = context;
            }
 
-            public async Task Handle(Command request, CancellationToken cancellationToken)
+            public async Task  Handle(Command request, CancellationToken cancellationToken)
             {
                 var activity = await _context.Activities.FindAsync(request.Activity.Id); 
 
                 _mapper.Map(request.Activity, activity);
                 
                 await _context.SaveChangesAsync(); 
-
-            
+                         
             }
         }
     }
